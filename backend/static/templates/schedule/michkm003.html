@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rozkład jazdy</title>
+
+    <style type="text/css">
+        * {
+            font-weight: normal;
+            font-family: "Open Sans";
+            /*font-family: "Calibri";*/
+        }
+    </style>
+    <style th:text="${style}"></style>
+    <link rel="stylesheet" type="text/css" href="css/michkm001.css"/>
+</head>
+<body>
+<table class="main-table" border="1">
+    <tr>
+        <td colspan="4" style="width: 48%">
+            <center><h1 th:text="${busLine.getName()}" class="bus-line-name"></h1></center>
+        </td>
+        <td colspan="4" style="width: 52%; font-size: 12px; padding: 5px 10px;">
+            <center>
+                <div th:text="${busStop.getName()}" class="bus-stop-name"></div>
+            </center>
+            <div>
+                <center>TRASA: <span th:text="${route.getDetails()}" class="track-name"></span></center>
+            </div>
+            <center><div th:text="${route.getDescription()}" class="all-track-name"></div></center>
+            <center><span th:text="${route.getName()}" class="destination-name"></span></center>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" rowspan="25" class='bus-stops-list'>
+                <span th:each="connection,iter: ${connections}">
+                    <span th:text="${iter.index}"></span>. <span
+                        th:text="${connection.getBusStop().getName()}"></span><br/>
+                </span>
+            <br/><br/>
+            <center><img th:src="${logoPath}" alt="logo"/></center>
+        </td>
+        <th colspan="2">
+            <h6>Dzień powszedni</h6>
+        </th>
+        <th colspan="2">
+            <h6>Soboty i święta</h6>
+        </th>
+    </tr>
+    <tr>
+        <th><h6>Godz.</h6></th>
+        <th><h6>Minuty</h6></th>
+        <th><h6>Godz.</h6></th>
+        <th><h6>Minuty</h6></th>
+    </tr>
+    <tr th:each="hour,iter: ${availableHours}" class='departure-box'>
+        <td>
+            <center><span th:if="${hour} < 10" class="hour">0</span><span th:text="${hour}" class="hour"></span></center>
+        </td>
+        <td>
+                <span th:each="departure,iter: ${departures.getRo()}" class='departure-box'>
+                    <span th:if="${departure.getD().split(':')[0]} == ${hour}">
+                        <span th:if="${departure.getS()} == 'B'" class='color-blue'
+                              th:text="${departure.getD().split(':')[1]}"></span>
+                        <span th:if="${departure.getS()} != 'B'" th:text="${departure.getD().split(':')[1]}"></span>
+                    </span>
+                </span>
+            <span th:if="${not departures.isListHasTime('RO', hour)}">-</span>
+        </td>
+        <td>
+            <center><span th:if="${hour} < 10" class="hour">0</span><span th:text="${hour}" class="hour"></span></center>
+        </td>
+        <td>
+                <span th:each="departure,iter: ${departures.getWs()}" class='departure-box'>
+                    <span th:if="${departure.getD().split(':')[0]} == ${hour}">
+                        <span th:if="${departure.getS()} == 'B'" class='color-blue'
+                              th:text="${departure.getD().split(':')[1]}"></span>
+                        <span th:if="${departure.getS()} != 'B'" th:text="${departure.getD().split(':')[1]}"></span>
+                    </span>
+                </span>
+            <span th:if="${not departures.isListHasTime('WS', hour)}">-</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="bottom-note">
+            <b class="color-blue">00:00 - kurs skomunikowany z pociągiem SKA1</b>
+            Organizator: Województwo Małopolskie<br/>
+            Operator: Koleje Małopolskie Sp. z o.o.<br />
+            Przewoźnik: Firma Przewozowa Michalus<br />
+            <center class="color-red">Rozkład ważny od <span class="color-red" th:text="${version.getDate()}"></span></center>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

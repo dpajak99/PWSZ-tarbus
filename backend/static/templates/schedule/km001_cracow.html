@@ -1,0 +1,170 @@
+<table class="km001_main-table">
+  <tr>
+    <td class="km001_header-cell km001_header-cell-left km001_no-border-bottom km001_no-border-right">
+      <!--/*@thymesVar id="logoPath" type="java.lang.String"*/-->
+      <img th:src="${logoPath}" alt="logo" class="km001_logo"/>
+    </td>
+    <td colspan="2" class="km001_header-cell km001_header-cell-right km001_no-border-bottom km001_no-border-left">
+      <center>
+        <p>"Koleje Małopolskie" sp. z.o.o.</p>
+        <p>ul. Wodna 2</p>
+        <p>30-556 Kraków</p>
+      </center>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" class="km001_header-title km001_no-border-top">
+      <div style="height: 8px"></div>
+      <center><p class="km001_bus-stop-name">
+        Przystanek:
+        <!--/*@thymesVar id="busStop" type="com.tarbus.models.BusStop"*/-->
+        <span th:text="${busStop.getName()}"></span>
+        <span th:if="${routeConnection.getIsOptional() == 1}"> (NŻ)</span>
+      </p></center>
+      <center class="km001_version-name">Rozkład ważny od
+        <!--/*@thymesVar id="version" type="com.tarbus.models.ScheduleVersion"*/-->
+        <span th:text="${version.getDateStart()}"></span> do <span th:text="${version.getDate()}"></span></center>
+    </td>
+  </tr>
+  <tr class="km001_no-border-bottom">
+    <td colspan="3" class="km001_details-row km001_no-border-bottom">
+      <table class="km001_table-no-border km001_no-border-bottom" width="100%">
+        <tr>
+          <td rowspan="2" class="km001_bus-line-box km001_details-row">
+            <center><span class="km001_bus-line-name" th:text="${busLine.getName()}"></span></center>
+          </td>
+          <td class="km001_route-cell__destination">
+            Kierunek: <span th:text="${route.getName()}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="km001_route-cell__details" valign="top">
+              <span th:if="${busLine.getName() == 'A10'}">
+                <p class="km001_version-name" style="margin-bottom: 5px; font-weight: bold; color: #28395F">
+                  Uwaga! Autobusy linii A10 nie kursują w dniu 15.VIII
+                </p>
+              </span>
+            <span class="km001_bold">Trasa: </span><span
+            th:text="${#strings.listJoin(cities, ' - ')}"></span>
+            <div style="height: 5px"></div>
+            <span class="km001_bold">Przystanki:</span>
+            <span th:each="routeConnectionOnTrack,iter: ${allRouteConnections}" th:with="size=${#lists.size(allRouteConnections)}">
+              <span th:if="${routeConnectionOnTrack.getLp() >= routeConnection.getLp() && routeConnectionOnTrack.getBusStop().getCity() != 'Paczółtowice'}">
+                <span th:text="${routeConnectionOnTrack.getBusStop().getName()}"></span>
+                <span th:if="${routeConnectionOnTrack.getIsOptional() == 1}"> (NŻ)</span>
+                <span th:if="${iter.index < size - 1}">>>></span>
+              </span>
+            </span>
+            <span th:if="${(route.getId() == 244 && routeConnection.getLp() < 16) || (route.getId() == 245 && route.getLp() < 9)}">
+            <div  th:if="${#lists.size(routes) < 3}" style="height: 5px"></div>
+            <span class="km001_bold">Przystanki na kursach oznaczonych literą "X":</span>
+            <span th:each="routeConnectionOnTrack,iter: ${allRouteConnections}" th:with="size=${#lists.size(allRouteConnections)}">
+              <span th:if="${routeConnectionOnTrack.getLp() >= routeConnection.getLp()}">
+                <span th:text="${routeConnectionOnTrack.getBusStop().getName()}"></span>
+                <span th:if="${routeConnectionOnTrack.getIsOptional() == 1}"> (NŻ)</span>
+                <span th:if="${iter.index < size - 1}">>>></span>
+              </span>
+            </span>
+            </span>
+          </td>
+        </tr>
+        <tr class="km001_no-border-bottom">
+          <td colspan="2" class="km001_no-border-bottom">
+            <table class="km001_departures-table km001_table-border km001_no-border-left km001_no-border-bottom km001_no-border-right"
+                   th:each="rowNumber: ${#numbers.sequence(0,2)}"
+                   th:with="departures=${rowNumber == 0 ? departures.getRo() : (rowNumber == 1 ? departures.getWs() : departures.getSw())}">
+              <tr class="km001_no-border-left km001_no-border-right">
+                <td colspan="9" class="km001_day-cell km001_no-border-left km001_no-border-right">
+                  <span th:if="${rowNumber == 0}">PONIEDZIAŁEK - PIĄTEK OPRÓCZ ŚWIĄT</span>
+                  <span th:if="${rowNumber == 1}">SOBOTY</span>
+                  <span th:if="${rowNumber == 2}">NIEDZIELE I ŚWIĘTA</span>
+                </td>
+              </tr>
+              <span th:if="${#lists.size(departures)} > 0" th:with="size=${#lists.size(departures)}" th:remove="tag">
+                <tr th:each="i: ${#numbers.sequence(0, (size / 10))}" class="km001_no-border-left km001_no-border-right km001_departure-row">
+                  <td th:each="j: ${#numbers.sequence(1, 9)}"
+                      th:with="index=${i * 9 + j - 1}"
+                      th:attr="class=${j == 1 ? 'km001_cell-departure km001_no-border-left' : (j == 9 ? 'km001_cell-departure km001_no-border-right' : 'km001_cell-departure')}"
+                      valign="middle"
+                      align="center"
+                  >
+                    <span th:if="${index < size}" th:with="symbols=${departures[index].getSymbolArray()}">
+                      <span
+                        th:classappend="${#lists.contains(symbols, &quot;K&quot;) or #lists.contains(symbols, &quot;T&quot;) or #lists.contains(symbols, &quot;KT&quot;) or #lists.contains(symbols, &quot;P&quot;)} ? km001_symbol_n : km001_symbol_none">
+                        <span th:text="${#strings.length(departures[index].getD()) == 4 ? '0' + departures[index].getD() : departures[index].getD()  }"></span>
+                        <span class="km001_symbol_b" th:if="${#lists.contains(symbols, &quot;b&quot;) and rowNumber == 2}">b</span>
+                        <span class="km001_symbol_b" th:if="${#lists.contains(symbols, &quot;X&quot;)}">X</span>
+                        <span class="km001_symbol_b" th:if="${#lists.contains(symbols, &quot;a&quot;) and rowNumber == 2}">a</span>
+                        <span class="km001_symbol_b" th:if="${#lists.contains(symbols, &quot;g&quot;)and rowNumber == 1}">g</span>
+                      </span>
+                      <img
+                        th:if="${#lists.contains(symbols, &quot;K&quot;) or #lists.contains(symbols, &quot;P&quot;) or #lists.contains(symbols, &quot;T&quot;) or #lists.contains(symbols, &quot;KT&quot;)}"
+                        th:src="${driveUrl} + 'train_symbol.png'" class="km001_train-symbol"/>
+                      <span th:if="${#lists.contains(symbols, &quot;K&quot;)}">K</span>
+                      <span th:if="${#lists.contains(symbols, &quot;T&quot;)}">T</span>
+                      <span th:if="${#lists.contains(symbols, &quot;KT&quot;)}">KT</span>
+                    </span>
+                  </td>
+                </tr>
+              </span>
+              <tr th:if="${#lists.size(departures) == 0}"
+                  class="km001_no-border-left km001_no-border-bottom km001_no-border-right km001_box-no-departures km001_no-border-left km001_no-border-right">
+                <td colspan="9" class="km001_no-border-left km001_no-border-bottom km001_no-border-right km001_box-no-departures km001_no-border-left km001_no-border-right">
+                  Brak odjazdów
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr class="km001_no-border-top">
+    <td colspan="3" class="km001_footer km001_no-border-top">
+      <table class="km001_footer-table km001_no-border-top">
+        <tr class="km001_no-border-top">
+          <td class="km001_no-border-top">
+            <p>Legenda:</p>
+            <p>
+              (NŻ) - przystanek na żądanie<br/>
+              <span th:each="destination,iter: ${destinations}" th:with="destinationArray=${#strings.arraySplit(destination, '|')}">
+                <span th:if="${destinationArray[0] == &quot;K&quot; or destinationArray[0] == &quot;T&quot;}">
+                  <span class="km001_symbol_n">00:00</span>
+                  <img th:src="${driveUrl} + 'train_symbol.png'" class="km001_train-symbol" height="10px"/>
+                  <span th:text="${destinationArray[0]}" class="km001_bold"></span>
+                </span>
+                <span th:if="${destinationArray[0] == &quot;b&quot;}">
+                  <span class="km001_bold">b</span>
+                </span>
+                     <span th:if="${destinationArray[0] == &quot;g&quot;}">
+                  <span class="km001_bold">g</span>
+                </span>
+                <span th:if="${destinationArray[0] == &quot;a&quot;}">
+                  <span class="km001_bold">a</span>
+                </span>
+                <span th:if="${destinationArray[0] == &quot;X&quot;}">
+                  <span class="km001_bold">X</span>
+                </span>
+                <span th:if="${destinationArray[0] == &quot;n&quot; or destinationArray[0] == &quot;m&quot;}">
+                  <span class="km001_symbol_n">00:00</span>
+                </span>
+                 <span th:if="${destinationArray[0] == &quot;P&quot;}">
+                  <span class="km001_symbol_n">00:00</span>
+                  <img th:src="${driveUrl} + 'train_symbol.png'" class="km001_train-symbol" height="10px"/>
+                </span>
+                - <span th:text="${destinationArray[1]}"></span>
+                <br/>
+              </span>
+            </p>
+          </td>
+          <td class="km001_align-right" align="right" valign="top">
+            <img th:src="'file:///' + ${driveUrl} + 'malopolska.png'" height="1.2cm" style="margin-top: 6px"/>
+          </td>
+        </tr>
+      </table>
+      <br/>
+      <center><p class="km001_info-tile">Linie użyteczności publicznej - organizator Marszałek Województwa Małopolskiego [U]</p></center>
+      <center class="km001_website-url">kolejemalopolskie.com.pl</center>
+    </td>
+  </tr>
+</table>

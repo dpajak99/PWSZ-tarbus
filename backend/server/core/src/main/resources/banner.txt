@@ -1,0 +1,14 @@
+${AnsiColor.BRIGHT_CYAN}
+  _                    ____    _   _   ____
+ | |_    __ _   _ __  | __ )  | | | | / ___|
+ | __|  / _` | | '__| |  _ \  | | | | \___ \
+ | |_  | (_| | | |    | |_) | | |_| |  ___) |
+  \__|  \__,_| |_|    |____/   \___/  |____/
+
+UPDATED 1
+--------------------------------------------------------------------------
+Application Name : ${application.title}
+Application Version : ${application.version}
+Spring Boot Version : ${spring-boot.formatted-version}
+--------------------------------------------------------------------------
+${AnsiColor.WHITE}

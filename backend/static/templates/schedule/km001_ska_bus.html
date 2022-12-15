@@ -1,0 +1,155 @@
+<table class="main-table">
+  <tr>
+    <td class="main-table__first-column p-5">
+      <img th:src="${template.getImgReplacementSignUrl()}" alt="img_ska_sign" class="img_ska_sign"/>
+    </td>
+    <td colspan="2" class="main-table__second-column background-red">
+      <p class="f-23 f-b">ZASTĘPCZA KOMUNIKACJA AUTOBUSOWA</p>
+      <p class="f-19 f-b f-yellow">RAIL REPLACEMENT BUS SERVICE</p>
+    </td>
+  </tr>
+  <tr>
+    <td class="main-table__first-column">
+      <img th:src="${template.getImgLogoUrl()}" alt="img_logo" class="img_logo"/>
+    </td>
+    <td colspan="2" class="main-table__second-column">
+      <p class="f-22 f-b">
+        <span th:text="${template.getDateStart()}"></span>r. - <span th:text="${template.getDateEnd()}"></span>r.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td class="main-table__first-column background-blue">
+      <p class="f-68 f-b f-upper" th:text="${template.getBusLineName()}"></p>
+    </td>
+    <td colspan="2" class="main-table__second-column" valign="top">
+      <table class="w-100 nb-t nb-b nb-l nb-r">
+        <tr class="nb-l nb-r nb-t">
+          <td class="background-red nb-l nb-t nb-r p-2">
+            <p class="f-13 f-b">ODJAZDY ZE STACJI <span class="f-10 f-b f-yellow">/ DEPARTURES FROM THE STATION</span></p>
+          </td>
+        </tr>
+        <tr class="nb-l nb-r">
+          <td class="nb-l nb-r">
+            <p class="f-19 f-b f-upper" th:text="${template.getBusStopName()}"></p>
+          </td>
+        </tr>
+        <tr class="nb-l nb-r">
+          <td class="background-red nb-l nb-r p-2">
+            <p class="f-13 f-b">KIERUNEK <span class="f-10 f-b f-yellow">/ DIRECTION</span></p>
+          </td>
+        </tr>
+        <tr class="nb-l nb-r nb-b">
+          <td class="nb-l nb-b nb-r">
+            <p class="f-19 f-b f-upper" th:text="${template.getDestinationName()}"></p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td class="main-table__first-column">
+      <p class="f-19 f-b">TRASA / ROUTE</p>
+    </td>
+    <td colspan="2" class="main-table__second-column">
+      <table class="w-100 nb-t nb-b nb-l nb-r">
+        <tr class="nb-b nb-t nb-l nb-r">
+          <td
+            th:each="dayDescription,iter: ${template.getDescriptions()}"
+            th:style="'width:' + ${dayDescription.getWidthPercentage()}"
+            th:class="'background-blue p-5 pv-10 nb-b nb-t' + ${iter.index == 0 ? ' nb-l' : ''} + ${iter.index == (#lists.size(template.getDescriptions()) - 1) ? ' nb-r' : ''}"
+          >
+            <p class="f-11 f-b" th:text="${dayDescription.getNamePL()}"></p>
+            <p class="f-9 f-b f-yellow" th:if="${dayDescription.getNameEN() != null}" th:text="${dayDescription.getNameEN()}"></p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td class="main-table__first-column" valign="top">
+      <span th:remove="tag" th:each="nextBusStop,iter: ${template.getNextStops()}">
+          <table class="table-bus-stops" cellspacing="0" cellpadding="0" valign="top">
+            <tr>
+              <td class="background-blue" style="width: 20px; height: 20px; text-align: center">
+                <p class="f-15 f-b" th:text="${nextBusStop.getLp()}"></p>
+              </td>
+              <td th:class="${ iter.index == 0 ? 'background-blue' : ''}">
+                <p class="f-15 f-b" th:text="${nextBusStop.getName()}"></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+              </td>
+              <td th:class="${ iter.index == 0 ? 'background-blue' : ''}">
+                <div th:class="${(iter.index == 0 ? 'tbsn table-bus-stops__name-selected' : 'tbsn')}">
+                  <span th:with="busStopArray=${#strings.arraySplit(nextBusStop.getDescription(), '|')}">
+                    <p th:text="${busStopArray[0]}"></p>
+                    <p th:text="${busStopArray[1]}"></p>
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </table>
+      </span>
+    </td>
+    <td colspan="2" class="main-table__second-column">
+      <table class="w-100 nb-l nb-t nb-r nb-b">
+        <tr class="nb-l nb-r nb-b nb-t" th:each="hour : ${#numbers.sequence( 0, 23, 1)}">
+          <td
+            th:each="dayDescription,iter: ${template.getDescriptions()}"
+            th:style="'width:' + ${dayDescription.getWidthPercentage()}"
+            th:class="'nb-b nb-t' + ${iter.index == 0 ? ' nb-l' : ' nb-l'} + ${iter.index == (#lists.size(template.getDescriptions()) - 1)}"
+          >
+            <table class="w-100 nb-l nb-r nb-b nb-t">
+              <tr th:class="${'nb-l'+ (hour == 23 ? ' nb-b' : '') + (hour == 0 ? ' nb-t' : '')}">
+                <td style="width: 28px; height: 15px" th:class="${'background-yellow nb-l' + (hour == 23 ? ' nb-b' : '') + (hour == 0 ? ' nb-t' : '')}">
+                  <p class="f-b f-15" th:text="${hour}"></p>
+                </td>
+                <td th:class="${'nb-t td-hour' + (hour == 23 ? ' nb-b' : '') + (hour == 0 ? ' nb-t' : '')}">
+                  <span th:each="departure, index:${dayDescription.getDepartures(hour)}">
+                    <div class="departure">
+                      <span class="f-15" th:text="${departure.getMinutesString()}"></span><!--
+                      --><span class="symbol" th:each="symbol, index:${departure.getSymbolArray()}"><!--
+                        --><span th:switch="${symbol}"><!--
+                          --><span class="f-15" th:case="'n'">+</span><!--
+                          --><span class="f-15" th:case="'C'">#</span><!--
+                          --><span th:case="*"><span class="f-15" th:text="${symbol}"></span></span>
+                        </span>
+                      </span>
+                    </div>
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" class="main-table__full-column td-comments" valign="top" align="left">
+      <p class="f-10 f-b">UWAGI:</p>
+<!--      <p class="f-11 f-b" style="margin-top: 3px">-->
+<!--        Kursy komunikacji zastępczej odbywają się:<br />-->
+<!--        1) Od poniedziałku do piątku oraz 24 XII – 8 I – na trasie Trzebinia – Chrzanów<br />-->
+<!--        2) W soboty oraz niedziele oprócz 24 XII – 8 I – na trasie Trzebinia – Oświęcim<br />-->
+<!--      </p>-->
+<!--      <p class="f-11 f-b" style="margin-top: 3px; color: red">-->
+<!--        W SOBOTY ORAZ NIEDZIELE OPRÓCZ 24 XII-8I KURSY ZASTĘPCZEJ KOMUNIKACJI AUTOBUSOWEJ ODBYWAJĄ SIĘ NA TRASIE TRZEBINIA-OŚWIĘCIM-->
+<!--      </p>-->
+      
+      <span th:if="${template.isIgnoreSymbols() == false}" th:each="destination,iter: ${template.getDestinations()}"
+            th:with="destinationArray=${#strings.arraySplit(destination, '|')}">
+        <span th:switch="${destinationArray[0]}">
+          <span class="f-15 f-b" th:case="'n'">+</span>
+          <span class="f-15 f-b" th:case="'C'">#</span>
+          <span th:case="*"><span class="f-15 f-b" th:text="${destinationArray[0]}"></span></span>
+        </span>
+        <span class="f-15">- <span th:text="${destinationArray[1]}"></span></span>
+        <br/>
+      </span>
+    </td>
+  </tr>
+</table>

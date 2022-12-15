@@ -1,0 +1,23 @@
+{
+   "note":"Zgadnijcie co znaczy nowy widok",
+   "versions": [
+      {
+         "company_name": "Michalus",
+         "subscribe_code": "mich001",
+      	  "validation_date": 0,
+      	  "avatar_src": "https://api.tarbus.pl/static/company/1/app_logo.png"
+      },
+      {
+         "company_name": "Koleje małopolskie",
+         "subscribe_code": "michkm001",
+      	  "validation_date": 0,
+      	  "avatar_src": "https://api.tarbus.pl/static/company/2/app_logo.png"
+      },
+      {
+         "company_name": "MPK Tarnów",
+         "subscribe_code": "mpktarnow",
+      	  "validation_date": 0,
+      	  "avatar_src": "https://api.tarbus.pl/static/company/3/app_logo.png"
+      }
+  ]
+}

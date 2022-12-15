@@ -1,0 +1,326 @@
+@page {
+    padding: 0;
+    margin: 0;
+    size: A4;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    font-family: "Arial";
+}
+
+.background-red {
+    background-color: #c00000;
+}
+
+.background-red * {
+    color: #ffffff;
+}
+
+.background-blue {
+    background-color: #384f87;
+}
+
+.background-blue * {
+    color: #ffffff;
+}
+
+.background-yellow {
+    background-color: #ffc300;
+}
+
+.background-yellow * {
+    color: #000000;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-25 {
+    width: 25% !important;
+}
+
+.p-2 {
+    padding: 2px !important;
+}
+
+.p-5 {
+    padding: 5px !important;
+}
+
+.pv-10 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.nb-t{
+    border-top: none !important;
+}
+
+.nb-b {
+    border-bottom: none !important;
+}
+
+.nb-l {
+    border-left: none !important;
+}
+
+.nb-r {
+    border-right: none !important;
+}
+
+.nb-a, .nb-a td, .nb-a tr, .nb-a table {
+    border: none !important;
+}
+
+.f-yellow {
+    color: #ffe699 !important;
+}
+
+.f-upper {
+    text-transform: uppercase !important;
+}
+
+.f-b, .f-b * {
+    font-weight: bold !important;
+}
+
+.f-6 {
+    font-size: 6px !important;
+}
+
+.f-8 {
+    font-size: 8px !important;
+}
+
+.f-9 {
+    font-size: 9px !important;
+}
+
+.f-10 {
+    font-size: 10px !important;
+}
+
+
+.f-11 {
+    font-size: 11px !important;
+}
+
+.f-12 {
+    font-size: 12px !important;
+}
+
+.f-13 {
+    font-size: 13px !important;
+}
+
+.f-14 {
+    font-size: 14px !important;
+}
+
+.f-15 {
+    font-size: 15px !important;
+}
+
+.f-16 {
+    font-size: 16px !important;
+}
+
+.f-17 {
+    font-size: 17px !important;
+}
+
+.f-18 {
+    font-size: 18px !important;
+}
+
+.f-20 {
+    font-size: 24px !important;
+}
+
+.f-22 {
+    font-size: 22px !important;
+}
+
+.f-23 {
+    font-size: 23px !important;
+}
+
+.f-24 {
+    font-size: 24px !important;
+}
+
+.f-27 {
+    font-size: 27px !important;
+}
+
+.f-28 {
+    font-size: 28px !important;
+}
+
+.f-29 {
+    font-size: 29px !important;
+}
+
+.f-30 {
+    font-size: 30px !important;
+}
+
+.f-36 {
+    font-size: 36px !important;
+}
+
+.f-60 {
+    font-size: 60px;
+}
+
+
+.f-68 {
+    font-size: 68px;
+}
+
+td {
+    text-align: center;
+}
+
+.main-table {
+    width: 200mm;
+    margin: 0.5cm auto 0;
+}
+
+table, tr, td {
+    border: solid 1px #000 ;
+    border-collapse: collapse;
+}
+
+.main-table__first-column {
+    width: 45%;
+}
+
+.main-table__second-column {
+    width: 55%;
+}
+
+.main-table__full-column {
+    width: 100%;
+}
+
+.img_ska_sign {
+    height: 120px;
+    width: 120px;
+}
+
+.img_logo {
+    height: 60px;
+}
+
+.img_ska_vehicle {
+    width: 92px;
+    height: 92px;
+    margin-top: 5px;
+}
+
+.img_social {
+    width: 51px;
+    height: 51px;
+}
+
+.img_ska_qr {
+    width: 127px;
+    height: 127px;
+}
+
+.table-bus-stops {
+    width: 100%;
+    border: none;
+}
+
+.tbsn {
+    margin-left: 10px;
+    border-left: 2px solid #000;
+    padding-left: 3px;
+}
+
+.table-bus-stops__name-selected {
+    border-left: 2px solid #5B9BD5;
+}
+
+.tbsn * {
+    font-size: 13px;
+    font-style: italic;
+}
+
+
+.table-bus-stops td, .table-bus-stops tr  {
+    border: none;
+    text-align: left;
+}
+
+.table-bus-stops td {
+    padding: 3px;
+}
+
+.td-hour {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.td-comments {
+    height: 150px;
+    text-align: left;
+    padding: 5px;
+}
+
+.td-additionals {
+    padding: 10px 50px;
+}
+
+.td-additionals * {
+    text-align: left;
+}
+
+.td-link {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.td-qr {
+    padding-left: 110px;
+}
+
+.link {
+    color: #384f87;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.ska-box {
+    background-color: #ffc300;
+    text-align: center;
+    width: 120px;
+    border: solid 2px #000 !important;
+}
+
+.ska-box * {
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+
+.departure {
+    width: 27px;
+    display: inline-block;
+}
+
+.departure * {
+    font-weight: bold;
+}
+
+.symbol, .symbol * {
+    font-size: 15px !important;
+}

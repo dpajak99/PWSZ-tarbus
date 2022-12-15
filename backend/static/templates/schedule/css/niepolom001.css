@@ -1,0 +1,228 @@
+@page {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+table, td, tr {
+    border: solid 1px #000;
+    border-collapse: collapse;
+}
+
+.niepolom001_main-table {
+    margin: 1cm auto 0;
+    width: 660px;
+    font-weight: normal;
+    font-family: "Roboto";
+}
+
+
+.niepolom001_header-row {
+    height: 2.5cm;
+}
+
+.niepolom001_details-row {
+    width: 100%;
+    background-color: #8EAADB;
+    font-size: 14px;
+    text-align: center;
+    padding: 2px 5px;
+}
+
+.niepolom001_destination-row {
+    width: 100%;
+    text-align: center;
+    padding: 2px 5px;
+}
+
+.niepolom001_destination-row span {
+    font-size: 14px;
+}
+
+.niepolom001_bus-stop-row {
+    width: 100%;
+    background-color: #8EAADB;
+    text-align: center;
+    padding: 2px 5px;
+}
+
+.niepolom001_bus-stop-row span {
+    font-size: 14px;
+}
+
+.niepolom001_bus-stops-row {
+    width: 100%;
+    text-align: start;
+    padding: 3px 5px 10px;
+    line-height: 10px;
+}
+
+.niepolom001_bus-stops-row span {
+    font-size: 10px;
+}
+
+.niepolom001_day-header-row {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+    padding: 2px 5px;
+}
+
+.niepolom001_departures-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.niepolom001_logo {
+    border-right: none !important;
+    border-left: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.niepolom001_logo img {
+    height: 2.4cm;
+    margin: 5px 0;
+    padding: 0 0;
+}
+
+
+.niepolom001_title {
+    width: 85%;
+    padding: 10px;
+    text-align: center;
+    border-right: none !important;
+}
+
+.niepolom001_title span {
+    font-size: 30px;
+    font-weight: bold;
+
+}
+
+.niepolom001_bus-line-name {
+    border-left: none !important;
+}
+
+.niepolom001_bus-line-name span {
+    font-size: 66px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.niepolom001_day-cell {
+    text-align: center;
+    text-transform: uppercase;
+    background: #FFE599;
+    font-size: 10px;
+    padding: 3px;
+}
+
+.niepolom001_day-cell span {
+    font-weight: bold;
+    color: #000;
+}
+
+.niepolom001_symbol_b {
+    font-weight: bold;
+}
+
+.niepolom001_cell-departure {
+    padding: 2px;
+}
+
+.niepolom001_cell-departure, .niepolom001_cell-departure span {
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+    width: 10%;
+    vertical-align: middle;
+}
+
+.niepolom001_train-symbol {
+    height: 10px;
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+.niepolom001_symbol_n {
+
+}
+
+.niepolom001_symbol_none {
+    padding-top: 4px;
+}
+
+.niepolom001_departure-row {
+    width: 100%;
+}
+
+.niepolom001_box-no-departures {
+    text-align: center;
+    font-size: 11px;
+    padding: 2px;
+    font-style: italic;
+}
+
+.niepolom001_bold {
+    font-weight: bold;
+}
+
+.niepolom001_no-border-left {
+    border-left: none !important;
+}
+
+.niepolom001_no-border-right {
+    border-right: none !important;
+}
+
+.niepolom001_no-border-top {
+    border-top: none !important;
+}
+
+.niepolom001_no-border-bottom {
+    border-bottom: none !important;
+}
+
+.niepolom001_no-border {
+    border: none !important;
+}
+
+.niepolom001_country-note {
+    padding: 14px 10px 10px;
+}
+
+.niepolom001_version-name {
+    padding: 3px 3px 14px;
+}
+
+.niepolom001_version-name span {
+    font-size: 11px;
+    line-height: 11px;
+    color: red;
+}
+
+.niepolom001_destination_desc {
+    font-size: 11px;
+    line-height: 11px;
+}
+
+.niepolom001_destination_symbol {
+    font-size: 11px;
+    line-height: 11px;
+    font-weight: bold;
+}
+
+.niepolom001_legend {
+    padding: 2px 5px;
+}
+
+.niepolom001_legend span {
+    font-size: 11px;
+}
+

@@ -1,0 +1,47 @@
+server:
+  port: 8082
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://192.168.113.156:5432/tarBUS
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      password: 8399
+      database: tarbus
+      username: tarbuslocal
+      authentication-database: admin
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  sql:
+    init:
+      continue-on-error: true
+
+tarbus:
+  app:
+    url: http://localhost:8082
+    jwtSecret: bezKoderSecretKey
+    jwtExpirationMs: 86400000
+    storage-relative-path: ../static
+    storage-absolute-path: /home/dpajak99/Storage/GitHub/tarBUS/tarBUS-server/static

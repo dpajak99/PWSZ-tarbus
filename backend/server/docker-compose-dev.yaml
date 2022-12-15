@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  dev-tarbus-server:
+    restart: always
+    build:
+      context: .
+      dockerfile: .app-config/dev/Dockerfile
+    container_name: dev-tarbus-server
+    volumes:
+    - /home/projects/dev-api.tarbus.pl/static:/opt/static
+    networks:
+      - dev-network
+networks:
+  dev-network:
+    external: true

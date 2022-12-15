@@ -1,0 +1,124 @@
+{
+  "tables": [
+    {
+      "title": "bus_lines",
+      "exported_title": "BusLine",
+      "columns": {
+          "id": "bl_id",
+          "name": "bl_name",
+          "version_id": "bl_version_id"
+        }
+    },
+    {
+      "title": "bus_stops",
+      "exported_title": "BusStop",
+      "columns": {
+          "id": "bs_id",
+          "search_name": "bs_search_name",
+          "name": "bs_name",
+          "lng": "bs_lng",
+          "lat": "bs_lat",
+          "destinations": "bs_destinations"
+        }
+    },
+    {
+      "title": "bus_stops_connections",
+      "exported_title": "BusStopConnection",
+      "columns": {
+          "from_bus_stop": "bsc_from_bus_stop_id",
+          "to_bus_stop": "bsc_to_bus_stop_id",
+          "distance": "bsc_distance",
+          "track_shape": "bsc_coords_list"
+        }
+    },
+    {
+      "title": "schedule_calendar",
+      "exported_title": "Calendar",
+      "columns": {
+          "date": "c_date",
+          "day_types": "c_day_types"
+        }
+    },
+    {
+      "title": "departures",
+      "exported_title": "Departure",
+      "columns": {
+          "id": "d_id",
+          "bus_stop_id": "d_bus_stop_id",
+          "track_id": "d_track_id",
+          "external_uuid": "d_external_uuid",
+          "bus_stop_lp": "d_bus_stop_lp",
+          "bus_line_id": "d_bus_line_id",
+          "time_in_min": "d_time_in_min",
+          "time_string": "d_time_string",
+          "symbols": "d_symbols",
+          "is_last_departure": "d_is_last"
+        }
+    },
+    {
+      "title": "destinations",
+      "exported_title": "Destinations",
+      "columns": {
+          "route_id": "ds_route_id",
+          "symbol": "ds_symbol",
+          "direction_board_name": "ds_direction_board_name",
+          "schedule_name": "ds_shedule_name"
+        }
+    },
+    {
+      "title": "routes",
+      "exported_title": "Route",
+      "columns": {
+          "id": "r_id",
+          "destination_name": "r_destination_name",
+          "destination_desc": "r_destination_desc",
+          "bus_line_id": "r_bus_line_id"
+        }
+    },
+    {
+      "title": "routes_connections",
+      "exported_title": "RouteConnections",
+      "columns": {
+          "id": "rc_id",
+          "route_id": "rc_route_id",
+          "is_optional": "rc_is_optional",
+          "lp": "rc_lp",
+          "bus_stop_id": "rc_bus_stop_id"
+        }
+    },
+    {
+      "title": "tracks",
+      "exported_title": "Track",
+      "columns": {
+        "id": "t_id",
+        "day_string": "t_day_string",
+        "day_types": "t_day_types",
+        "route_id": "t_route_id"
+      }
+    },
+    {
+      "title": "schedule_versions",
+      "exported_title": "Versions",
+      "columns": {
+        "id": "v_id",
+        "date": "v_date",
+        "company_id": "v_company_id",
+        "subscribe_code": "v_subscribe_code",
+        "is_external": "v_is_external"
+      }
+    },
+    {
+      "title": "company",
+      "exported_title": "Company",
+      "columns": {
+        "id": "cpn_id",
+        "name": "cpn_name",
+        "avatar": "cpn_avatar",
+        "website": "cpn_website",
+        "email": "cpn_email",
+        "phone": "cpn_phone",
+        "business_card": "cpn_business_card"
+      }
+    }
+  ]
+}

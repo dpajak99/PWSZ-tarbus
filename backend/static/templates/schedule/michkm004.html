@@ -1,0 +1,111 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+  <title>Rozkład jazdy</title>
+
+  <style type="text/css">
+      * {
+          font-weight: normal;
+          font-family: "Open Sans";
+      }
+  </style>
+  <style th:text="${style}"></style>
+  <link rel="stylesheet" type="text/css" href="css/michkm004.css"/>
+</head>
+<body>
+<table class="main-table">
+  <tr>
+    <td class="header-cell header-cell-left no-border-bottom no-border-right">
+      <img th:src="${logoPath}" alt="logo"/>
+    </td>
+    <td class="header-cell header-cell-right no-border-bottom no-border-left">
+      <center>
+        <p>"Koleje Małopolskie" sp. z.o.o.</p>
+        <p>ul. Racławicka 56/416</p>
+        <p>30-017 Kraków</p>
+      </center>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" class="header-title no-border-top">
+      <center><p class="bus-stop-name">Przystanek: <span th:text="${busStop.getName()}"></span></p></center>
+      <center class="version-name">Rozkład ważny od <span th:text="${version.getDateStart()}"></span> do <span th:text="${version.getDate()}"></span></center>
+    </td>
+  </tr>
+  <span th:each="routeTable,iter: ${routes}" th:remove="tag">
+  <tr>
+    <td colspan="3" >
+      <table class="table-no-border">
+        <tr>
+          <td rowspan="3" class="bus-line-box">
+            <center><span class="bus-line-name" th:text="${routeTable.getBusLine().getName()}"></span></center>
+          </td>
+          <td class="route-cell__destination">
+            Kierunek: <span th:text="${routeTable.getRoute().getName()}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="route-cell__details">
+            <span class="bold">Trasa: </span><span
+            th:text="${routeTable.getRoute().joinDescription(' - ')}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="route-cell__details">
+            <span class="bold">Przystanki:</span>
+            <span th:each="stopOnTrack,iter: ${routeTable.getBusStops()}" th:with="size=${#lists.size(routeTable.getBusStops())}">
+              <span th:text="${stopOnTrack.getName()}"></span>
+              <span th:if="${iter.index < size - 1}">>>></span>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" >
+            <table class="departures-table table-border no-border-left no-border-right" th:each="rowNumber: ${#numbers.sequence(0,2)}"
+                   th:with="departures=${rowNumber == 0 ? routeTable.getDepartures().getRo() : (rowNumber == 1 ? routeTable.getDepartures().getWs() : routeTable.getDepartures().getSw())}">
+              <tr class="no-border-left no-border-right">
+                <td colspan="11" class="day-cell no-border-left no-border-right">
+                  <span th:if="${rowNumber == 0}">PONIEDZIAŁEK - PIĄTEK OPRÓCZ ŚWIĄT</span>
+                  <span th:if="${rowNumber == 1}">SOBOTY</span>
+                  <span th:if="${rowNumber == 2}">NIEDZIELE I ŚWIĘTA</span>
+                </td>
+              </tr>
+              <span th:with="size=${#lists.size(departures)}"  th:remove="tag">
+                        <tr th:each="i: ${#numbers.sequence(0, (size / 12))}" class="no-border-left no-border-right">
+                          <td th:each="j: ${#numbers.sequence(1, 11)}"
+                              th:with="index=${i * 11 + j - 1}"
+                              th:class="${j == 1 ? 'cell-departure no-border-left' : (j == 11 ? 'cell-departure no-border-right' : 'cell-departure')}"
+                          >
+                            <span th:if="${index < size}">
+                              <span th:class="${'symbol-'+departures[index].getS()}"
+                                    th:text="${departures[index].getD()}"></span>
+                            </span>
+                          </td>
+                        </tr>
+                      </span>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </span>
+  <tr>
+    <td colspan="3" class="footer">
+      <table class="footer-table ">
+        <tr>
+          <td>
+            <p>Legenda:</p>
+            <p><span class="symbol-b">00:00</span> - kurs skomunikowany z pociągiem SKA1 z Krakowa</p>
+          </td>
+          <td class="align-right">
+            <img th:src="${driveUrl} + 'malopolska.png'"/>
+          </td>
+        </tr>
+      </table>
+      <center><p class="info-tile">Linie użyteczności publicznej - organizator Marszałek Województwa Małopolskiego [U]</p></center>
+      <center class="website-url">www.malopolskiekoleje.pl</center>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

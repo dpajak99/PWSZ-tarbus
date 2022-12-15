@@ -1,0 +1,96 @@
+@page {
+    /*padding: 0.5cm 1.5cm;*/
+    padding: 0;
+    margin: 0;
+    size: 148mm 210mm;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    font-weight: bold;
+}
+h6 {
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    padding: 2px 5px;
+    margin: 0;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.main-table {
+    width: 143mm;
+}
+
+.bus-stops-list {
+    font-size: 12px;
+    padding: 10px;
+}
+
+.bus-stops-list img {
+    width: 5cm;
+}
+
+.bus-stop-name {
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.color-blue {
+    color: #1C439D;
+}
+
+.color-red {
+    color: #F04D22;
+    font-weight: bold;
+}
+
+.destination-name {
+    text-align: center;
+    font-weight: bold;
+}
+
+.track-name {
+    text-transform: uppercase;
+}
+
+.bus-line-name {
+    font-size: 55px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+
+.departure-box td {
+    padding: 1px 5px;
+    /*margin: 0;*/
+    /*font-size: 0.772em;*/
+    font-size: 13px;
+}
+
+.hour {
+    font-weight: bold;
+}
+
+.bottom-note {
+    padding: 5px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.bottom-note b {
+    font-weight: bold;
+}
+
+.all-track-name {
+    font-size: 11px;
+    line-height: 12px;
+    margin: 3px 0;
+}

@@ -1,0 +1,119 @@
+<span th:each="routeTable,iter: ${routes}" th:remove="tag">
+<table class="niepolom001_main-table">
+    <tr class="niepolom001_header-row">
+      <td class="niepolom001_title">
+        <span>KOMUNIKACJA GMINNA</span>
+      </td>
+      <td class="niepolom001_logo">
+        <center><img th:src="${driveUrl} + 'logo.png'" alt="logo"/></center>
+      </td>
+      <td class="niepolom001_bus-line-name">
+        <span th:text="${routeTable.busLine.getName()}"></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="niepolom001_details-row" colspan="3">
+        <span th:text="${routeTable.route.getDetails()}"></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="niepolom001_destination-row" colspan="3">
+        <span><span class="niepolom001_bold">Kierunek: </span><span th:text="${routeTable.getRoute().getName()}"></span></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="niepolom001_bus-stop-row" colspan="3">
+        <span>Przystanek: <span th:text="${busStop.getName()}"></span></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="niepolom001_bus-stops-row" colspan="3">
+        <span class="niepolom001_bold">Następne przystanki:</span><br/>
+        <span th:each="routeConnectionOnTrack,iter: ${routeTable.allRouteConnections}" th:with="size=${#lists.size(routeTable.allRouteConnections)}">
+          <span th:if="${routeConnectionOnTrack.getLp() >= routeTable.routeConnection.getLp()}">
+            <span th:text="${routeConnectionOnTrack.getBusStop().getName()}"></span>
+              <span th:if="${routeConnectionOnTrack.getIsOptional() == 1}"> (NŻ)</span>
+              <span th:if="${iter.index < size - 1}">>>></span>
+            </span>
+          </span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="niepolom001_day-header-row niepolom001_no-border-bottom">
+        <span>GODZINY ODJAZDÓW OD PONIEDZIAŁKU DO PIĄTKU</span>
+      </td>
+    </tr>
+    <tr th:with="departures=${routeTable.getDepartures().getRo()}">
+      <td colspan="3" th:if="${#lists.size(departures)} > 0" th:with="size=${#lists.size(departures)}">
+        <table class="niepolom001_departures-table niepolom001_no-border">
+          <tr th:each="i: ${#numbers.sequence(0, (size / 11))}" class="niepolom001_no-border-left niepolom001_no-border-right">
+            <td th:each="j: ${#numbers.sequence(1, 10)}"
+                th:with="index=${i * 10 + j - 1}"
+                th:attr="class=${j == 1 ? 'niepolom001_cell-departure niepolom001_no-border-left' : (j == 9 ? 'niepolom001_cell-departure niepolom001_no-border-right' : 'niepolom001_cell-departure')}"
+                valign="middle"
+                align="center"
+            >
+              <span th:if="${index < size}" th:with="symbols=${departures[index].getSymbolArray()}">
+                <span
+                  th:classappend="${#lists.contains(symbols, &quot;K&quot;) or #lists.contains(symbols, &quot;T&quot;) or #lists.contains(symbols, &quot;KT&quot;) or #lists.contains(symbols, &quot;P&quot;)} ? niepolom001_symbol_n : niepolom001_symbol_none">
+                  <span th:text="${#strings.length(departures[index].getD()) == 4 ? '0' + departures[index].getD() : departures[index].getD()  }"></span>
+                  <span class="niepolom001_symbol_b" th:if="${#lists.contains(symbols, &quot;b&quot;) and rowNumber == 2}">b</span>
+                </span>
+                <img
+                  th:if="${#lists.contains(symbols, &quot;K&quot;) or #lists.contains(symbols, &quot;P&quot;) or #lists.contains(symbols, &quot;T&quot;) or #lists.contains(symbols, &quot;KT&quot;)}"
+                  th:src="${driveUrl} + 'train_symbol.png'" class="niepolom001_train-symbol" alt=""/>
+                <span th:if="${#lists.contains(symbols, &quot;K&quot;)}">K</span>
+                <span th:if="${#lists.contains(symbols, &quot;T&quot;)}">T</span>
+                <span th:if="${#lists.contains(symbols, &quot;KT&quot;)}">KT</span>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td colspan="3" th:if="${#lists.size(departures) == 0}">
+        Brak odjazdów
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="niepolom001_day-header-row">
+        <span>Komunikacja gminna nie kursuje w soboty, niedziele oraz święta</span>
+      </td>
+    </tr>
+  <tr th:if="${destinations.size() != 0 && routeTable.getRoute().getName() != 'Chobot'}" class="niepolom001_no-border-bottom ">
+    <td colspan="3" class="niepolom001_no-border-bottom niepolom001_legend niepolom001_no-border-top">
+      <span>Legenda</span>
+    </td>
+  </tr>
+  <tr th:if="${routeTable.getRoute().getName() != 'Chobot'}" class="niepolom001_no-border" th:each="destination,iter: ${destinations}" th:with="destinationArray=${#strings.arraySplit(destination, '|')}">
+    <td colspan="3" class="niepolom001_no-border niepolom001_legend">
+      <table class="niepolom001_no-border" width="100%">
+        <tr class="niepolom001_no-border">
+          <td class="niepolom001_no-border niepolom001_destination_symbol">
+            <img th:src="${driveUrl} + 'train_symbol.png'" class="km001_train-symbol" height="10px"/>
+            <span th:text="${destinationArray[0]}"></span>
+          </td>
+          <td class="niepolom001_no-border niepolom001_destination_desc" style="width: 90%">
+            <span th:text="${destinationArray[1]}"></span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr th:if="${routeTable.getRoute().getName() == 'Chobot'}">
+    <td colspan="3" class="niepolom001_no-border niepolom001_legend">
+      <br />
+    </td>
+  </tr>
+  <tr class="niepolom001_no-border-top">
+    <td class="niepolom001_no-border-right niepolom001_no-border-top niepolom001_version-name" valign="bottom">
+        <span>Rozkład ważny od</span>
+        <span th:text="${routeTable.getRoute().getDateStart()}"></span>
+        <span th:if="${routeTable.getRoute().getDateEnd() != 'err'}"> do <span th:text="${routeTable.getRoute().getDateEnd()}"></span></span>
+    </td>
+    <td colspan="2" class="niepolom001_country-note niepolom001_no-border-left niepolom001_no-border-top">
+      <img th:src="${driveUrl} + 'schedule_note.png'" height="2.1cm" alt=""/>
+    </td>
+  </tr>
+</table>
+<br />
+</span>

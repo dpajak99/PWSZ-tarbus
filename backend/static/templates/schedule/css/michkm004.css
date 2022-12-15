@@ -1,0 +1,200 @@
+@page {
+    /*padding: 0.5cm 1.5cm;*/
+    padding: 0;
+    margin: 0;
+    size: a4;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding-top: 0.7cm;
+}
+
+.no-border {
+    border: none;
+}
+
+.table-no-border, .table-no-border tr, .table-no-border td  {
+    border: none;
+}
+
+.table-border, .table-border tr, .table-border td  {
+    border: solid 1px #000;
+    border-collapse: collapse;
+}
+
+
+
+.no-border-top {
+    border-top: none;
+}
+
+.no-border-bottom {
+    border-bottom: none;
+}
+
+.no-border-left {
+    border-left: none !important;
+}
+
+
+.no-border-right {
+    border-right: none !important;
+}
+
+.border-bottom {
+    border-bottom: solid 1px #000;
+}
+
+table, td, tr {
+    border: solid 1px #000;
+    border-collapse: collapse;
+}
+
+.day-cell {
+    text-align: center;
+    text-transform: uppercase;
+    background: #FFE599;
+    font-size: 10px;
+    padding: 3px;
+}
+
+.day-cell span {
+    font-weight: bold;
+    color: #000;
+}
+
+.main-table {
+    width: 660px;
+    margin: 0 auto;
+}
+
+.departures-table {
+    width: 100%;
+}
+
+.symbol-b {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 10px;
+}
+
+.bus-line-box {
+    width: 150px;
+    min-height: 80px;
+    max-height: 130px;
+}
+
+.bus-line-name {
+    font-size: 51px;
+    font-weight: bold;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.route-cell__destination {
+    background-color: #CC0000;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 4px;
+}
+
+.route-cell__destination span {
+    font-weight: bold;
+}
+
+.route-cell__details {
+    color: #000000;
+    font-size: 8px;
+    padding: 1px 0 8px 0;
+}
+
+.cell-departure, .cell-departure span {
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    width: 9.090909091%;
+    padding: 2px 0;
+}
+
+.header-spacing {
+    width: 2cm;
+}
+
+.header-cell {
+    text-align: center;
+    padding: 15px 0 0 0;
+}
+
+.header-cell p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 9px;
+}
+
+.header-cell-right {
+    padding-left: 150px;
+}
+
+.header-cell-left {
+    padding-right: 150px;
+}
+
+.header-cell img {
+    height: 50px;
+}
+
+.footer  {
+    padding: 5px;
+}
+
+.footer-table {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.footer-table, .footer-table tr, .footer-table td {
+    border:none;
+}
+
+.footer-table span , .footer-table p {
+    font-size: 9px;
+}
+
+.footer-table img {
+    height: 46px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.info-tile {
+    font-size: 9px;
+}
+
+.website-url {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.bus-stop-name, .bus-stop-name span {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.version-name, .version-name span {
+    font-size: 8px;
+}
+
+.header-title {
+    padding: 9px;
+}
